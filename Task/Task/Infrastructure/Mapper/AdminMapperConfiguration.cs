@@ -13,7 +13,7 @@ namespace Task.Infrastructure.Mapper
     {
         protected virtual void CreateCatalogMaps()
         {
-            CreateMap<Product, ProductModel>().ReverseMap();
+            CreateMap<NaseejProduct, ProductModel>().ReverseMap();
         }
 
         #region Properties

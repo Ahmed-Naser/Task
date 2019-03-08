@@ -23,10 +23,7 @@ namespace Task.Data
         }
         #endregion
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Picture> Pictures { get; set; }
-        public DbSet<ProductPicture> Product_Picture_Mapping { get; set; }
-        public DbSet<PictureBinary> PictureBinary { get; set; }
+        public DbSet<NaseejProduct> NaseejProducts { get; set; }
 
         public TaskContext CreateDbContext(string[] args)
         {

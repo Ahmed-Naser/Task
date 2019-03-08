@@ -4,37 +4,35 @@ using System.Text;
 
 namespace Task.Core.Domain
 {
-    public partial class Product : BaseEntity
+    public partial class NaseejProduct : BaseEntity
     {
-        private ICollection<ProductPicture> _productPictures;
 
         /// <summary>
-        /// Gets or sets the name
+        /// Gets or sets the item count
         /// </summary>
-        public string Name { get; set; }
+        public decimal ItemCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Description
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or sets the quantity
+        /// </summary>
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Gets or sets the price
         /// </summary>
-        public decimal Price { get; set; }
+        public decimal UnitPrices { get; set; }
 
         /// <summary>
-        /// Gets or sets the date
+        /// Gets or sets the total
         /// </summary>
-        public DateTime LastUpdated { get; set; }
+        public double Total { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the entity has been deleted
-        /// </summary>
         public bool Deleted { get; set; }
 
-        /// <summary>
-        /// Gets or sets the collection of ProductPicture
-        /// </summary>
-        public virtual ICollection<ProductPicture> ProductPictures
-        {
-            get => _productPictures ?? (_productPictures = new List<ProductPicture>());
-            protected set => _productPictures = value;
-        }
     }
 }

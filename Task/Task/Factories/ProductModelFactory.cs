@@ -13,41 +13,35 @@ namespace Task.Factories
     {
         #region fields
         private readonly IProductService _productService;
-        private readonly IPictureService _pictureService;
-
         #endregion
 
         #region ctor
-        public ProductModelFactory(IProductService productService,
-               IPictureService pictureService)
+        public ProductModelFactory(IProductService productService)
         {
             _productService = productService;
-            _pictureService = pictureService;
         }
         #endregion
 
-        public ProductModel PrepareProductModel(ProductModel model, Product product)
+        public ProductModel PrepareProductModel(ProductModel model, NaseejProduct product)
         {
             if (product != null)
             {
                 //fill in model values from the entity
-                model = model ?? product.ToModel<ProductModel>();
+                model = model ?? product.ToModel<ProductModel>();  // Auomapper and dto
 
                 var Product = _productService.GetProductById(product.Id);
             }
 
             if (product == null)
             {
-                model.LastUpdated = DateTime.Now;
+                if (model.ItemCount > model.Quantity)
+                {
+                    throw new Exception();
+                }
+
             }
 
             return model;
         }
-
-        public ProductSearchModel PrepareProductSearchModel(ProductSearchModel searchModel)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

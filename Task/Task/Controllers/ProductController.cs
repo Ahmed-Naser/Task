@@ -15,16 +15,13 @@ namespace Task.Controllers
     {
         #region fields
         private readonly IProductService _productService;
-        private readonly IPictureService _pictureService;
         private readonly IProductModelFactory _productModelFactory;
         #endregion
 
         #region ctor
-        public ProductController(IPictureService pictureService,
-               IProductService productService,
+        public ProductController(IProductService productService,
                IProductModelFactory productModelFactory)
         {
-            _pictureService = pictureService;
             _productService = productService;
             _productModelFactory = productModelFactory;
         }
@@ -44,7 +41,7 @@ namespace Task.Controllers
         public virtual IActionResult List()
         {
             //prepare model
-            var model = _productModelFactory.PrepareProductSearchModel(new ProductSearchModel());
+            var model = _productModelFactory.PrepareProductModel(new ProductModel(),null);
 
             return View(model);
         }
@@ -62,9 +59,8 @@ namespace Task.Controllers
             if (ModelState.IsValid)
             {
                 //product
-                var product = model.ToEntity<Product>();
+                var product = model.ToEntity<NaseejProduct>();
                 product.Id = model.Id;
-                product.LastUpdated = DateTime.UtcNow;
                 _productService.InsertProduct(product);
             }
             return View(model);
@@ -97,7 +93,6 @@ namespace Task.Controllers
                 product.Id = model.Id;
                 product = model.ToEntity(product);
 
-                product.LastUpdated = DateTime.UtcNow;
                 _productService.UpdateProduct(product);
             }
             //prepare model
